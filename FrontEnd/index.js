@@ -46,6 +46,7 @@ const figure = [
 ]
 
 const gallery = document.querySelector("figure");
+const filters = document.querySelector(".filters");
 
 async function getMesprojets() {
     const response = await fetch("http://localhost:5678/api-docs/");
@@ -53,21 +54,62 @@ async function getMesprojets() {
 }
 getMesprojets();
 
-async function affichageMesprojets(gallery) {
-    const mesprojets = await getMesprojets ();
+async function affichageMesprojets() {
+    const mesprojets = await getMesprojets();
     mesprojets.forEach((mesprojets) => {
+        createMesprojets(gallery);
+    });
+}
+affichageMesprojets();
+
+function createMesprojets(gallery){
         const figure = document.createElement("figure");
         const img = document.createElement("img");
         const figcaption = document.createElement("figcaption");
-        img.src = mesprojets.imageUrl
+        img.src = mesprojets.imageUrl;
         figcaption.textContent = mesprojets.title;
         figure.classList.add("gallery");
         figure.appendChild(img);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
-        });
 }
-        
-affichageMesprojets();
+     
+async function getCategorys(){
+    const response = await fetch("http://localhost:5678/api-docs/");
+    const response.Json = await response.json();
+}
 
-console.log(affichageMesprojets)
+getFiltres()
+
+async function displayCategorysButtons() {
+    const filtres = await getCategorys();
+    filtres.forEach(filtres => {
+        const btn = document.createElement("button");
+        btn.textContent = filtre.name.toUpperCase();
+        btn.id = filtre.id;
+        filters.appendChild(btn);
+    })
+}
+
+displayFiltresButtons();
+
+//filtres au clic sur les boutons
+
+function filterCategory() {
+    const mesprojets = await getMesprojets();
+    const buttons = document.querySelectorAll(".filters button");
+    buttons.forEach(button => {
+        button.addEventListener("click", (e)=>{
+            btnId = e.target.id;
+            gallery.innerHTML ="";
+            if (btnId !== "0") {
+                const mesprojetsTriCategory = mesprojets.filter((gallery)=> {
+                    return mesprojets.categoryId == btnId;
+                });
+                mesprojetsTriCategory.forEach(gallery => {
+                    createGallery(gallery)
+                });
+            }
+        });
+    });
+}
