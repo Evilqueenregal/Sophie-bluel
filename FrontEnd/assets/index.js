@@ -1,4 +1,4 @@
-const gallery = document.querySelector("figure");
+const gallery = document.querySelector("gallery");
 
 function showWorks(workData) {
     
@@ -21,7 +21,7 @@ const filters = document.querySelector(".filters");
 
     function displayCategorysButtons(categoryData) {
         const btnFilterAll = document.createElement("button");
-        btnFilterAll.innerText = "tous";
+        btnFilterAll.innerText = "Tous";
         filters.appendChild(btnFilterAll);
 
         categoryData.forEach(element => {
@@ -36,12 +36,12 @@ const filters = document.querySelector(".filters");
 
         btnFilters.forEach(button => {
             button.addEventListener("click", () => {
-                const btnId = button.CDATA_SECTION_NODE.id;
+                const btnId = button.dataset.id;
                 let filtre = workData.filter(function(element) {
                     return element.categoryId == btnId;
                 });
                 gallery.innerHTML = "";
-                return showWorks(workData);
+                showWorks(filtre);
             });
         });
         btnFilterAll.addEventListener("click", () => {
