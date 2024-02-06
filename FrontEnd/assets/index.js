@@ -50,23 +50,6 @@ const filters = document.querySelector(".filters");
         });
     }
 
-// variables globales pour le formulaire 
 
-const name = document.querySelector("form #name");
-const email = document.querySelector("form #email");
-const message = document.querySelector("form #message");
-const form = document.querySelector("form");
-
-// fonction de connexion
-
-async function login() {
-    const users = await getUsers();
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userName = name.value;
-        const userEmail = email.value;
-        const userMessage = message.value;
-    });
-}
 
 
