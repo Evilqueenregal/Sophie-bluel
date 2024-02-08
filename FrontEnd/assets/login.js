@@ -1,44 +1,38 @@
 // variables globales pour le formulaire 
 
-const alredyLoggedError = document.querySelector(".alredyLogged__error");
-const loginEmailError = document.querySelector(".loginEmail__error");
-const loginMdpError = document.querySelector(".loginMdp__error");
-
-
-const email = document.querySelector("form #email");
-const password = document.querySelector("form #password");
-const form = document.querySelector("form");
-
+const email = document.querySelector("#email");
+const password = document.querySelector("#password");
 const submit = document.querySelector("submit");
-
-alredyLogged();
 
 // fonction de connexion
 
-async function login() {
-    const users = await getUsers();
-    form.addEventListener("submit", (e) => {
+    submit.addEventListener("submit", (e) => {
         e.preventDefault();
         const userEmail = email.value;
         const userPwd = password.value;
-        let userFound = false;
 
-        users.forEach((user) => {
-            if (
-                user.mail == userEmail &&
-                user.password == userPwd 
-            ) {
-                userFound = true;
-                window.sessionStorage.loged = true;
-                window.location.href = "../login.html"
+        fetch("http://localhost:5678/api/users/login", {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                "email": userEmail,
+                "password": userPwd,
+            })
+        })
+        .then(function(response) {
+            if(!response.ok) {
+                document.querySelector(".error").innerText = 'Email ou mot de passe incorrect';
+                return;
+            } else {
+                response.json().then(function(data) {
+                    localStorage.setItem('token',data.token);
+                    window.location = "index.html";
+                })
             }
-        });
-
-        if (!userFound) {
-            email.classList.add("inputErrorLogin");
-            password.classList.add("inputErrorLogin");
-        }
+        })
+        .catch(error =>
+            console.log('error:'+ error)
+            );
     });
-}
-
-login();

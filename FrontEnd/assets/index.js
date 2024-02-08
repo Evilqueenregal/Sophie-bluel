@@ -50,6 +50,11 @@ const filters = document.querySelector(".filters");
         });
     }
 
+const admin = document.querySelector('.admin');
 
+if (localStorage.getItem('token')) {
+    filters.style.display = "none";
+    admin.innerHTML = '<a href="#">Mode édition</a>';
+}
 
 

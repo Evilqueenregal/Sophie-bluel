@@ -19,12 +19,3 @@ const apiCategories = async() => {
 
 apiCategories();
 
-const getUsers = async() => {
-  await fetch("http://localhost:5678/api/post")
-  .then(response => response.json())
-  .then((data) => (postData = data))
-
-    showPost (postData);
-}
-
-apiUsers();
