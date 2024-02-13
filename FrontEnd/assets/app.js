@@ -3,13 +3,32 @@ const focusableSelector = 'button, a, input, textarea'
 let focusables = []
 let previouslyFocusedElement = null
 
+const gallery = document.querySelector(".gallery");
+
+function showWorks(workData) {
+    
+    workData.forEach(element => {
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        const figcaption = document.createElement("figcaption");
+        
+        img.src = element.imageUrl;
+        figcaption.innerText = element.title;
+        
+        gallery.appendChild(figure);
+        figure.appendChild(img);
+        figure.appendChild(figcaption);
+    });
+    
+}
+
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'))
     focusables = Array.from(modal.querySelectorAll(focusableSelector))
     previouslyFocusedElement = document.querySelector(':focus')
-    focusables[0].focus()
     modal.style.display = null;
+    focusables[0].focus()
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
     modal.addEventListener('click', closeModal)
