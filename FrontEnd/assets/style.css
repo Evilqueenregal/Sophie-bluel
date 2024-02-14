@@ -213,6 +213,11 @@ body, html {
 	animation: fadeIn .3s both;
 }
 
+.modal1 {
+	display: flex;
+	justify-content: space-around;
+}
+
 .modal-wrapper {
     overflow: auto;
     width: 600px;
