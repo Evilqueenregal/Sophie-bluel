@@ -7,19 +7,21 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	
 </head>
 <body>
 	<div class="admin"></div>
+			<a href="#">Mode édition</a>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -40,6 +42,14 @@
 		<h2>Mes Projets</h2>
 		<div class="filters"></div>
 		<div class="gallery"></div>
+		<a href="#modal1" class="js-modal">Ouvrir la boite modale</a>
+		<aside id="modal1" class="modal1" aria-hidden="true" role="dialog" aria-labelledby="titlemodale" style="display: none;">
+			<div class="modal-wrapper js-modal-stop">
+				<button class="js-modal-close">Fermer la boite modale</button>
+				<h2 id ="titlemodale">Galerie photo</h2>
+				<div class="galleryModal"></div>
+			</div>
+		</aside>
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
