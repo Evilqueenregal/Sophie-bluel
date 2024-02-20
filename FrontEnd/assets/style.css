@@ -201,6 +201,32 @@ body, html {
 	box-shadow: 0 0 10px blue ;
 }
 
+.galleryModal {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+justify-content: center;
+grid-column-gap: 10px;
+grid-row-gap: 10px;
+}
+
+.button2{
+	text-align: center;
+	background-color:#1D6154;
+	color: white;
+	border-radius: 25px;
+	font-weight: bold;
+	border: 2px solid #1D6154;
+	padding: 10px 20px;
+	margin-top: 20px;
+	width: 33%;
+	position: relative;
+	top: 50%;
+	left: 33%;
+}
+
+.galleryModal img {
+	width: 80%;
+}
 
 .modal {
 	position: fixed;
@@ -232,6 +258,12 @@ body, html {
 	width: 600px;
 	padding: 20px;
 	background-color: #fff;
+h2{
+color: #000000;
+font-family: Work Sans;
+font-weight: 400;
+font-size: 26px;
+}
 }
 
 

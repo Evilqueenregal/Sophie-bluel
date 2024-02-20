@@ -87,27 +87,11 @@ const focusableSelector ='button, a, input, textarea'
 let focusables = []
 let previouslyFocusedElement = null
 
-function showWorks(workData) {
-    
-    workData.forEach(element => {
-        const figure = document.createElement("figure");
-        const img = document.createElement("img");
-        const figcaption = document.createElement("figcaption");
-        
-        img.src = element.imageUrl;
-        figcaption.innerText = element.title;
-        
-        gallery.appendChild(figure);
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
-    });
-    
-}
 
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'))
-    focusables = Array.from(modal.querySelectorAll(focusablesSelector))
+    focusables = Array.from(modal.querySelectorAll(focusableSelector))
     previouslyFocusedElement = document.querySelector(':focus')
     modal.style.display = null;
     focusables[0].focus()
@@ -118,17 +102,71 @@ const openModal = function (e) {
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
+// affichage de la poubelle
+
+async function displayGalleryModal () {
+    galleryModal.innerHTML ="";
+    const galleryData = await getmodal();
+    galleryData.forEach(projet => {
+        const figure = document.createElement("figure")
+        const img = document.createElement("img")
+        const span = document.createElement("span")
+        const trash = document.createElement("i")
+
+        img.src = projet.imageUrl
+
+        trash.classList.add("fa-solid", "fa-trash-can");
+        trash.id = projet.id
+
+        span.appendChild(trash)
+        figure.appendChild(span)
+        figure.appendChild(img)
+        galleryModal.appendChild(figure)
+    });
+    deleteProjet()
+}
+displayGalleryModal()
+
+//supression d'une image dans la modale 
+
+function deleteProjet() {
+    const trashAll = document.querySelectorAll(".fa-trash-can")
+    trashAll.forEach(trash => {
+        trash.addEventListener("click", (e)=>{
+            const id = trash.id
+            const init ={
+                method:"DELETE",
+                Headers:{"content-Type" :"application/json"},
+            }
+            fetch("https://localhost:5678/api/works/" +id,init)
+            .then((response)=>{
+                if (!response.ok) {
+                    console.log("delete n'a pas fonctionné")
+                }
+                return response.json()
+            })
+           .then((data)=>{
+                console.log("delete a reussi voici la data :",data)
+                displayGalleryModal()
+                displayProjets()
+           }) 
+        })
+    })
+}
+
+
 const closeModal = function (e) {
     if (modal === null) return
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus()
     e.preventDefault()
     window.setTimeout(function() {
-        modal.style.display ="none"
+        modal.style.display = "none"
         modal = null
     }, 500)
     modal.style.display = "none"
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
+    modal.removeEventlistener('click', closeModal)
     modal.querySelector('.js-modal-close').removeEventlistener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventlistener('click', stopPropagation)
     modal = null
@@ -166,6 +204,7 @@ window.addEventListener('keydown', function (e) {
     if (e.key === 'Tab' && modal !== null)
     focusInModal (e)
 })
+
 
 
 
