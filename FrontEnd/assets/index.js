@@ -104,55 +104,118 @@ const openModal = function (e) {
 
 // affichage de la poubelle
 
-async function displayGalleryModal () {
-    galleryModal.innerHTML ="";
-    const galleryData = await getmodal();
-    galleryData.forEach(projet => {
-        const figure = document.createElement("figure")
-        const img = document.createElement("img")
-        const span = document.createElement("span")
-        const trash = document.createElement("i")
-
-        img.src = projet.imageUrl
-
-        trash.classList.add("fa-solid", "fa-trash-can");
-        trash.id = projet.id
-
-        span.appendChild(trash)
-        figure.appendChild(span)
-        figure.appendChild(img)
-        galleryModal.appendChild(figure)
-    });
-    deleteProjet()
-}
-displayGalleryModal()
-
-//supression d'une image dans la modale 
-
 function deleteProjet() {
-    const trashAll = document.querySelectorAll(".fa-trash-can")
-    trashAll.forEach(trash => {
-        trash.addEventListener("click", (e)=>{
-            const id = trash.id
-            const init ={
-                method:"DELETE",
-                Headers:{"content-Type" :"application/json"},
-            }
-            fetch("https://localhost:5678/api/works/" +id,init)
-            .then((response)=>{
-                if (!response.ok) {
-                    console.log("delete n'a pas fonctionné")
+    const trashIcons = document.querySelectorAll(".fa-trash-can");
+
+    trashIcons.forEach(trashIcon => {
+        trashIcon.addEventListener("click", async () => {
+            const projetId = trashIcon.id;
+
+            try {
+                const response = await fetch(`https://localhost:5678/api/works/${projetId}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                if (response.ok) {
+                    // Supprimer le projet de la galerie
+                    const projetFigure = trashIcon.closest("figure");
+                    galerie.removeChild(projetFigure);
+                    // Rafraîchir la galerie
+                    displayGalleryModal();
+                } else {
+                    console.error("La suppression du projet a échoué");
                 }
-                return response.json()
-            })
-           .then((data)=>{
-                console.log("delete a reussi voici la data :",data)
-                displayGalleryModal()
-                displayProjets()
-           }) 
-        })
-    })
+            } catch (error) {
+                console.error("Une erreur est survenue lors de la suppression du projet", error);
+            }
+        });
+    });
 }
+
+// Appeler la fonction deleteProjet une fois la page chargée
+document.addEventListener("DOMContentLoaded", deleteProjet);
+
+
+// // *****deuxieme modale, ajout de projet******
+
+// const btnAddModal = document.querySelector(".galleryModal button");
+// const modalAddProjet = document.querySelector(".modalAddProjet");
+// const modalGallerie = document.querySelector(".modalGallerie");
+// const arrowleft = document.querySelector(".modalAddProjet .fa-arrow-left");
+// const markAdd = document.querySelector(".modalAddProjet .fa-xmark");
+
+// function displayAddmodal() {
+//     btnAddModal.addEventListener("click", () => {
+//         modalAddProjet.style.display = "flex";
+//         modalGallerie.style.display = "none";
+//     });
+//     arrowleft.addEventListener("click", () => {
+//         modalAddProjet.style.display = "none";
+//         modalGallerie.style.display = "flex";
+//     });
+//     markAdd.addEventListener("click", () => {
+//         containerModals.style.display = "none";
+//         window.location = "index.html";
+//     });
+// }
+// displayAddmodal();
+// //****prévisualiser*****
+// const previewImg = document.querySelector(".containerFile img");
+// const inputFile = document.querySelector(".containerFile input");
+// const labelFile = document.querySelector(".containerFile label");
+// const iconFile = document.querySelector(".containerFile .fa-image");
+// const pFile = document.querySelector(".containerFile p");
+// //**** */ changement sur l'input file****
+// inputFile.addEventListener("change", () => {
+//     const file = inputFile.files[0];
+//     console.log(file);
+//     if (file) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             previewImg.src = e.target.result;
+//             previewImg.style.display = "flex";
+//             labelFile.style.display = "none";
+//             iconFile.style.display = "none";
+//             pFile.style.display = "none";
+//         };
+//         reader.readAsDataURL(file);
+//     }
+// });
+// // ***ajouter un projet*****
+// const form = document.querySelector("form");
+// const title = document.querySelector("#title");
+// const category = document.querySelector("#category");
+// form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+//     const formData = {
+//         title: title.value,
+//         category: {
+//             id: category.value,
+//             name: category.option[category.selectedIndex].text,
+//         },
+//     };
+//     try {
+//         const reponse = await fetch("https://localhost:5678/api/works", {
+//             method: "POST",
+//             headers: {
+//                 "content-type": "application/json",
+//             },
+//             body: JSON.stringify(formData),
+//         });
+
+//         if (response.ok) {
+//             const data = await response.json();
+//             console.log("Nouveau Projet crée !", data)
+//         } else {
+//             console.error("Une erreur est survenue lors de la demande :", response.status, response.statusText);
+//         }
+//     } catch (error) {
+//         console.error("une erreur est survenue lors de l'envoi", error);
+//     }
+// });
 
 
 const closeModal = function (e) {
