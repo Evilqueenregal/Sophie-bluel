@@ -19,13 +19,15 @@ function showWorks(workData) {
     workData.forEach(element => {
         const figure = document.createElement("figure");
         const img = document.createElement("img");
-        const figcaption = document.createElement("figcaption");
+        const trash = document.querySelector('a');
+        trash.href = "#";
+        trash.innerHTML = '<i class="fas fa-trash-alt"></i>';
 
         img.src = element.imageUrl;
 
         galleryModal.appendChild(figure);
         figure.appendChild(img);
-        figure.appendChild(figcaption);
+        figure.appendChild(trash);
     });
     
 }
@@ -64,7 +66,7 @@ const filters = document.querySelector(".filters");
     }
 
 const admin = document.querySelector('.admin');
-const portfolio = document.querySelector('#portfolio')
+const titlePortfolio = document.querySelector('.title-portfolio');
 
 if (localStorage.getItem('token')) {
     filters.style.display = "none";
@@ -75,9 +77,14 @@ if (localStorage.getItem('token')) {
     btnModifier.innerHTML = '<i class="fas fa-edit"></i> Modifier';
     btnModifier.classList.add('js-modal');
 
+    const btnEdition = document.createElement('a');
+    btnEdition.href = "#";
+    btnEdition.innerHTML = 'Mode édition';
+
     const firstChild = portfolio.firstChild;
 
-    portfolio.insertBefore(btnModifier, firstChild);
+    titlePortfolio.appendChild(btnModifier);
+    admin.appendChild(btnEdition);
 }
 
 //La modale
@@ -105,7 +112,7 @@ const openModal = function (e) {
 // affichage de la poubelle
 
 function deleteProjet() {
-    const trashIcons = document.querySelectorAll(".fa-trash-can");
+    const trashIcons = document.querySelectorAll(".fa-trash-alt");
 
     trashIcons.forEach(trashIcon => {
         trashIcon.addEventListener("click", async () => {
@@ -268,6 +275,19 @@ window.addEventListener('keydown', function (e) {
     focusInModal (e)
 })
 
+const modalProjects = document.querySelector('.modal-projects');
+const modalForm = document.querySelector('.modal-form');
+const btnChange = document.querySelector('.button2');
+const btnBack = document.querySelector('.btn-back');
 
+btnChange.addEventListener('click', () => {
+    modalProjects.style.display = "none";
+    modalForm.style.display ="block";
+})
+
+btnBack.addEventListener('click', () => {
+    modalProjects.style.display = "block";
+    modalForm.style.display = "none";
+})
 
 

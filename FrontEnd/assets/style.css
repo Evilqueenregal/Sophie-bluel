@@ -190,15 +190,13 @@ li:hover {
 
 /* modale */
 
-body, html {
-    margin: 0;
-    padding: 0;
+.title-portfolio{
+	display: flex;
+	justify-content: center;
 }
 
-* {box-sizing: border-box;}
-
-*:focus {
-	box-shadow: 0 0 10px blue ;
+.title-portfolio a{
+	padding: 10px;
 }
 
 .galleryModal {
@@ -208,10 +206,6 @@ grid-row-gap: 10px;
 padding: 10px 10px;
 margin: 10px 10px;
 align-items: center;
-}
-
-hr {
-	border: 1px solid #B3B3B3;
 }
 
 .button2{
@@ -273,6 +267,10 @@ font-size: 26px;
 .fa-xmark {
 	color: black;
 }
+}
+
+.modal-form{
+	display: none;
 }
 
 
