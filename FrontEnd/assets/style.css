@@ -206,6 +206,16 @@ grid-row-gap: 10px;
 padding: 10px 10px;
 margin: 10px 10px;
 align-items: center;
+border-bottom: 1px solid #B3B3B3;
+}
+
+.js-modal-close {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+hr {
+	border: 1px solid #B3B3B3;
 }
 
 .button2{
@@ -264,13 +274,54 @@ font-family: Work Sans;
 font-weight: 400;
 font-size: 26px;
 }
-.fa-xmark {
-	color: black;
-}
 }
 
 .modal-form{
 	display: none;
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	border: 1px solid #E8F1F6;
+	background-color: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	margin-left: 90px;
+}
+.fa-image{
+	font-size: 78px;
+	color: #CBD6DC;
+}
+.btnAjout{
+	text-align: center;
+	background-color:#CBD6DC;
+	color: #306685;
+	border-radius: 50px;
+	font-weight:bold;
+	border: 2px solid #CBD6DC;
+	padding: 10px 20px;
+	width: 33%;
+}
+p{
+	color: #444444;
+	padding: 10px;
+	font-size: 10px;
+	font-weight: 400;
+}
+}
+
+.donnees {
+	margin-top: 20px;
+form{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+}
+.btn-back{
+	color: black;
 }
 
 

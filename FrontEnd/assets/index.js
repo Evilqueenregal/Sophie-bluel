@@ -19,8 +19,7 @@ function showWorks(workData) {
     workData.forEach(element => {
         const figure = document.createElement("figure");
         const img = document.createElement("img");
-        const trash = document.querySelector('a');
-        trash.href = "#";
+        const trash = document.querySelector('button');
         trash.innerHTML = '<i class="fas fa-trash-alt"></i>';
 
         img.src = element.imageUrl;
@@ -146,85 +145,6 @@ function deleteProjet() {
 document.addEventListener("DOMContentLoaded", deleteProjet);
 
 
-// // *****deuxieme modale, ajout de projet******
-
-// const btnAddModal = document.querySelector(".galleryModal button");
-// const modalAddProjet = document.querySelector(".modalAddProjet");
-// const modalGallerie = document.querySelector(".modalGallerie");
-// const arrowleft = document.querySelector(".modalAddProjet .fa-arrow-left");
-// const markAdd = document.querySelector(".modalAddProjet .fa-xmark");
-
-// function displayAddmodal() {
-//     btnAddModal.addEventListener("click", () => {
-//         modalAddProjet.style.display = "flex";
-//         modalGallerie.style.display = "none";
-//     });
-//     arrowleft.addEventListener("click", () => {
-//         modalAddProjet.style.display = "none";
-//         modalGallerie.style.display = "flex";
-//     });
-//     markAdd.addEventListener("click", () => {
-//         containerModals.style.display = "none";
-//         window.location = "index.html";
-//     });
-// }
-// displayAddmodal();
-// //****prévisualiser*****
-// const previewImg = document.querySelector(".containerFile img");
-// const inputFile = document.querySelector(".containerFile input");
-// const labelFile = document.querySelector(".containerFile label");
-// const iconFile = document.querySelector(".containerFile .fa-image");
-// const pFile = document.querySelector(".containerFile p");
-// //**** */ changement sur l'input file****
-// inputFile.addEventListener("change", () => {
-//     const file = inputFile.files[0];
-//     console.log(file);
-//     if (file) {
-//         const reader = new FileReader();
-//         reader.onload = function (e) {
-//             previewImg.src = e.target.result;
-//             previewImg.style.display = "flex";
-//             labelFile.style.display = "none";
-//             iconFile.style.display = "none";
-//             pFile.style.display = "none";
-//         };
-//         reader.readAsDataURL(file);
-//     }
-// });
-// // ***ajouter un projet*****
-// const form = document.querySelector("form");
-// const title = document.querySelector("#title");
-// const category = document.querySelector("#category");
-// form.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     const formData = {
-//         title: title.value,
-//         category: {
-//             id: category.value,
-//             name: category.option[category.selectedIndex].text,
-//         },
-//     };
-//     try {
-//         const reponse = await fetch("https://localhost:5678/api/works", {
-//             method: "POST",
-//             headers: {
-//                 "content-type": "application/json",
-//             },
-//             body: JSON.stringify(formData),
-//         });
-
-//         if (response.ok) {
-//             const data = await response.json();
-//             console.log("Nouveau Projet crée !", data)
-//         } else {
-//             console.error("Une erreur est survenue lors de la demande :", response.status, response.statusText);
-//         }
-//     } catch (error) {
-//         console.error("une erreur est survenue lors de l'envoi", error);
-//     }
-// });
-
-
 const closeModal = function (e) {
     if (modal === null) return
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus()
@@ -236,9 +156,9 @@ const closeModal = function (e) {
     modal.style.display = "none"
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
-    modal.removeEventlistener('click', closeModal)
-    modal.querySelector('.js-modal-close').removeEventlistener('click', closeModal)
-    modal.querySelector('.js-modal-stop').removeEventlistener('click', stopPropagation)
+    modal.removeEventListener('click', closeModal)
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
 }
 
