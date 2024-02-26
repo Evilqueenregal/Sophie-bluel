@@ -276,6 +276,10 @@ font-size: 26px;
 }
 }
 
+.fa-trash-alt{
+	color:black;
+}
+
 .modal-form{
 	display: none;
 .container{
@@ -310,6 +314,7 @@ p{
 	font-size: 10px;
 	font-weight: 400;
 }
+
 }
 
 .donnees {
@@ -319,11 +324,28 @@ form{
 	flex-direction: column;
 	align-items: flex-start;
 }
+label {
+	color: #3d3d3d;
+	font-family: Work Sans;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+	width: 32px;
+	height: 16px;
+	margin-top: 20px;
+	margin-left: 85px;
+}
+input{
+	width: 420px;
+	height: 51px;
+	color: #FFFFFF;
+	margin-top: 20px;
+	margin-left: 85px;
 }
 .btn-back{
 	color: black;
 }
-
+}
 
 .modal[aria-hidden="true"] {
 	animation-name: fadeOut;

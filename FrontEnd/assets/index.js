@@ -19,7 +19,7 @@ function showWorks(workData) {
     workData.forEach(element => {
         const figure = document.createElement("figure");
         const img = document.createElement("img");
-        const trash = document.querySelector('button');
+        const trash = document.createElement('button');
         trash.innerHTML = '<i class="fas fa-trash-alt"></i>';
 
         img.src = element.imageUrl;
@@ -210,4 +210,60 @@ btnBack.addEventListener('click', () => {
     modalForm.style.display = "none";
 })
 
+//2eme modal
+
+const previewImg = document.querySelector(".containerFile img");
+const inputFile = document.querySelector(".containerFile input");
+const labelFile = document.querySelector(".containerFile label");
+const iconFile  = document.querySelector(".containerFile .fa-image");
+const pFile = document.querySelector(".containerFile p");
+
+inputFile.addEventListener ("change", () => {
+    const file = inputFile.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImg.src = e.target.result;
+                previewImg.style.display = "flex";
+                labelFile.style.display = "none";
+                iconFile.style.display = "none";
+                pFile.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        }
+});
+
+//Ajout d'un projet
+
+const form = document.querySelector("form");
+const title = document.querySelector("#title");
+const category = document.querySelector("#category");
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = {
+        title: title.value,
+        category: {
+            id: category.value,
+            name: category.option[category.selectedIndex].text,
+        },
+    };
+    try {
+        const response = await fetch("https://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Nouveau Projet crée !", data)
+        } else {
+            console.error("Une erreur est survenue lors de la demande :", response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error("une erreur est survenue lors de l'envoi", error);
+    }
+});
 
