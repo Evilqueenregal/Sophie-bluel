@@ -282,7 +282,7 @@ font-size: 26px;
 
 .modal-form{
 	display: none;
-.container{
+.containerFile{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -341,6 +341,23 @@ input{
 	color: #FFFFFF;
 	margin-top: 20px;
 	margin-left: 85px;
+}
+select{
+	width: 420px;
+	height: 51px;
+	color: #FFFFFF;
+	margin-top: 20px;
+	margin-left: 85px;
+}
+.btnValid {
+	color:white;
+	background-color: #A7A7A7;
+	width: 237px;
+	height: 36px;
+	margin-left: 176px;
+	margin-top: 33px;
+	border-radius: 60px;
+	border: 1px solid #A7A7A7;
 }
 .btn-back{
 	color: black;

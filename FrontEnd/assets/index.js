@@ -218,9 +218,9 @@ const labelFile = document.querySelector(".containerFile label");
 const iconFile  = document.querySelector(".containerFile .fa-image");
 const pFile = document.querySelector(".containerFile p");
 
-inputFile.addEventListener ("change", () => {
+inputFile.addEventListener ("change", ()=>{
     const file = inputFile.files[0];
-
+        
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -234,36 +234,35 @@ inputFile.addEventListener ("change", () => {
         }
 });
 
+// Créer une liste de categories dans l'input select
+async function displayCategorieModal (){
+    const select = document.querySelector(".modal-form .donnees select")
+    const categories = await getCategories()
+    categories.forEach(categorie => {
+        const option = document.createElement("option")
+        option.value = categorie.id
+        option.textContent = categorie.name
+        select.appendChild(option)
+    })
+}
+displayCategorieModal()
+
 //Ajout d'un projet
 
-const form = document.querySelector("form");
-const title = document.querySelector("#title");
-const category = document.querySelector("#category");
-form.addEventListener("submit", async (e) => {
+const form = document.querySelector(".modal-form .donnees form");
+const title = document.querySelector(".modal-form .donnees #title");
+const categorie = document.querySelector("modal-form .donnees #categorie");
+form.addEventListener("btnValid", async (e) => {
     e.preventDefault();
-    const formData = {
-        title: title.value,
-        category: {
-            id: category.value,
-            name: category.option[category.selectedIndex].text,
-        },
-    };
-    try {
-        const response = await fetch("https://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Nouveau Projet crée !", data)
-        } else {
-            console.error("Une erreur est survenue lors de la demande :", response.status, response.statusText);
+    const formData = new FormData(form)
+    fetch("https://localhost:5678/api/works",{
+        method: "POST",
+        body:JSON.stringify(formData),
+        headers:{
+            "content-type":"application/json"
         }
-    } catch (error) {
-        console.error("une erreur est survenue lors de l'envoi", error);
-    }
+    }); 
+    
 });
+    
 
