@@ -235,34 +235,60 @@ inputFile.addEventListener ("change", ()=>{
 });
 
 // Créer une liste de categories dans l'input select
-async function displayCategorieModal (){
-    const select = document.querySelector(".modal-form .donnees select")
-    const categories = await getCategories()
-    categories.forEach(categorie => {
-        const option = document.createElement("option")
-        option.value = categorie.id
-        option.textContent = categorie.name
-        select.appendChild(option)
-    })
+async function getCategories () {
+    try {
+        const response = await fetch("https://localhost:5678/api/categories");
+        if (!response.ok) {
+            throw new Error("La requête n'a pas abouti avec succès.");
+        }
+        const categories = await response.json();
+        return categories;
+    }catch (error) {
+        console.error("Une erreur s'est produite lors de la récupération des catégories:", error);
+        throw error;
+    }
 }
-displayCategorieModal()
+
+async function displayCategorieModal() {
+    const select = document.querySelector(".modal-form .donnees select");
+
+    try {
+        const categories = await getCategories();
+        categories.forEach(categorie => {
+            const option = document.createElement("option");
+            option.value = categorie.id;
+            option.textContent = categorie.name;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Une erreur s'est produite lors de l'affichage des catégories dans le sélecteur:", error);
+    }
+}
+
+displayCategorieModal();
 
 //Ajout d'un projet
 
 const form = document.querySelector(".modal-form .donnees form");
 const title = document.querySelector(".modal-form .donnees #title");
-const categorie = document.querySelector("modal-form .donnees #categorie");
-form.addEventListener("btnValid", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form)
-    fetch("https://localhost:5678/api/works",{
-        method: "POST",
-        body:JSON.stringify(formData),
-        headers:{
-            "content-type":"application/json"
-        }
-    }); 
-    
-});
-    
+const categorie = document.querySelector(".modal-form .donnees #categorie");
 
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch("https://localhost:5678/api/works",{
+            method: "POST",
+            body: formData,
+        });
+
+        if (response.ok) {
+            console.log("Nouveau projet ajouté avec succés !");
+        } else {
+            console.error("Erreur lors de l'ajout du projet");
+        }
+    } catch (error) {
+        console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
+    }    
+});

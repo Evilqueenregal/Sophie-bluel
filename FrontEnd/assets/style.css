@@ -207,6 +207,13 @@ padding: 10px 10px;
 margin: 10px 10px;
 align-items: center;
 border-bottom: 1px solid #B3B3B3;
+button {
+	position: relative;
+	bottom: 127px;
+	right: 32px;
+	background-color:black;
+	border-radius: 3px;
+}
 }
 
 .js-modal-close {
@@ -277,7 +284,8 @@ font-size: 26px;
 }
 
 .fa-trash-alt{
-	color:black;
+	color:white;
+	width: 9px;
 }
 
 .modal-form{
@@ -336,7 +344,7 @@ label {
 	margin-left: 85px;
 }
 input{
-	width: 420px;
+	width: 413px;
 	height: 51px;
 	color: #FFFFFF;
 	margin-top: 20px;
