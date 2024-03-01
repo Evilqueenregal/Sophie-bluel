@@ -44,7 +44,7 @@
 		</div>
 		<div class="filters"></div>
 		<div class="gallery"></div>
-		<a href="#modal1" class="js-modal">Ouvrir la boite modale</a>
+		
 		<aside id="modal1" class="modal1" aria-hidden="true" role="dialog" aria-labelledby="titlemodale" style="display:none;">
 			<div class="modal-wrapper js-modal-stop">
 				<div class="js-modal-close">
@@ -52,8 +52,10 @@
 				</div>
 				<div class="modal-projects">
 					<h2 id ="titlemodale">Galerie photo</h2>
-					<div class="galleryModal"></div>	
-					<div class="button2">Ajouter une photo</div>
+					<div class="galleryModal"></div>
+					<div class="textCenter">
+						<button class="button2">Ajouter une photo</button>
+					</div>	
 				</div>
 				<div class="modal-form">
 					<div class="btn-back">
@@ -62,6 +64,7 @@
 					<h2 id ="titlemodale">Ajout photo</h2>
 					<div class="containerFile">
 						<i class="far fa-image"></i>
+						<input type="file">
 						<button class="btnAjout">+ Ajout photo</button>
 						<p>jpg, png : 4mo max</p>
 					</div>
@@ -70,8 +73,15 @@
 							<label for="titre">Titre</label>
 							<input type="text" name="titre" id="titre">
 							<label for="categorie">Categorie</label>
-							<select name="categorie" id="categorie"></select>
-							<button class="btnValid">Valider</button>
+							<select name="categorie" id="categorie">
+								<option value="0"></option>
+								<option value="0">Objets</option>
+								<option value="0">Appartements</option>
+								<option value="0">Hôtels & restaurants </option>
+							</select>
+							<div class="textCenter">
+								<button class="button2">Valider</button>
+							</div>
 						</form>
 					</div>
 				</div>	

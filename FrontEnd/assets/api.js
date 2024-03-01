@@ -4,6 +4,8 @@ const apiWorks = async() => {
     .then ((data) => (workData = data))
 
     showWorks(workData);
+    deleteProjet();
+    addWorks();
 }
 
 apiWorks();

@@ -5,6 +5,7 @@ function showWorks(workData) {
     
     workData.forEach(element => {
         const figure = document.createElement("figure");
+        figure.id = element.id;
         const img = document.createElement("img");
         const figcaption = document.createElement("figcaption");
         
@@ -18,8 +19,11 @@ function showWorks(workData) {
 
     workData.forEach(element => {
         const figure = document.createElement("figure");
+        figure.id = element.id;
         const img = document.createElement("img");
         const trash = document.createElement('button');
+        trash.classList.add('btn-delete');
+        trash.setAttribute('data-id', element.id)
         trash.innerHTML = '<i class="fas fa-trash-alt"></i>';
 
         img.src = element.imageUrl;
@@ -111,26 +115,31 @@ const openModal = function (e) {
 // affichage de la poubelle
 
 function deleteProjet() {
-    const trashIcons = document.querySelectorAll(".fa-trash-alt");
+    const btnDeletes = document.querySelectorAll(".btn-delete");
+    const galleryIndex = document.querySelectorAll('.gallery figure');
 
-    trashIcons.forEach(trashIcon => {
-        trashIcon.addEventListener("click", async () => {
-            const projetId = trashIcon.id;
+
+    btnDeletes.forEach((btnDelete, index) => {
+        btnDelete.addEventListener("click", async () => {
+
+            const projetId = btnDelete.dataset.id;
+            const figure = btnDelete.parentNode;
+            const token = localStorage.getItem('token');
 
             try {
-                const response = await fetch(`https://localhost:5678/api/works/${projetId}`, {
+                const response = await fetch(`http://localhost:5678/api/works/${projetId}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
                     },
                 });
 
                 if (response.ok) {
-                    // Supprimer le projet de la galerie
-                    const projetFigure = trashIcon.closest("figure");
-                    galerie.removeChild(projetFigure);
-                    // Rafraîchir la galerie
-                    displayGalleryModal();
+                    figure.remove();
+                    if(galleryIndex[index]) {
+                        galleryIndex[index].remove();
+                    }
                 } else {
                     console.error("La suppression du projet a échoué");
                 }
@@ -234,61 +243,37 @@ inputFile.addEventListener ("change", ()=>{
         }
 });
 
-// Créer une liste de categories dans l'input select
-async function getCategories () {
-    try {
-        const response = await fetch("https://localhost:5678/api/categories");
-        if (!response.ok) {
-            throw new Error("La requête n'a pas abouti avec succès.");
-        }
-        const categories = await response.json();
-        return categories;
-    }catch (error) {
-        console.error("Une erreur s'est produite lors de la récupération des catégories:", error);
-        throw error;
-    }
-}
-
-async function displayCategorieModal() {
-    const select = document.querySelector(".modal-form .donnees select");
-
-    try {
-        const categories = await getCategories();
-        categories.forEach(categorie => {
-            const option = document.createElement("option");
-            option.value = categorie.id;
-            option.textContent = categorie.name;
-            select.appendChild(option);
-        });
-    } catch (error) {
-        console.error("Une erreur s'est produite lors de l'affichage des catégories dans le sélecteur:", error);
-    }
-}
-
-displayCategorieModal();
-
 //Ajout d'un projet
 
 const form = document.querySelector(".modal-form .donnees form");
 const title = document.querySelector(".modal-form .donnees #title");
 const categorie = document.querySelector(".modal-form .donnees #categorie");
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
+//comparaison des valeurs imput & api (img text titre)
 
-    try {
-        const response = await fetch("https://localhost:5678/api/works",{
-            method: "POST",
-            body: formData,
-        });
+function addWorks(){
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData(form);
+    
+        try {
+            const response = await fetch("http://localhost:5678/api/works",{
+                method: "POST",
+                body: formData,
+            });
+    
+            if (response.ok) {
+                console.log("Nouveau projet ajouté avec succés !");
+                // vider la galerie de l index et de la modale
+                apiWorks();
+            } else {
+                console.error("Erreur lors de l'ajout du projet");
+            }
+        } catch (error) {
+            console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
+        }    
+    });
+}
 
-        if (response.ok) {
-            console.log("Nouveau projet ajouté avec succés !");
-        } else {
-            console.error("Erreur lors de l'ajout du projet");
-        }
-    } catch (error) {
-        console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
-    }    
-});
+
