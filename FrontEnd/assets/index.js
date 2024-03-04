@@ -222,7 +222,7 @@ btnBack.addEventListener('click', () => {
 //2eme modal
 
 const previewImg = document.querySelector(".containerFile img");
-const inputFile = document.querySelector(".containerFile input");
+const inputFile = document.querySelector(".containerFile input ");
 const labelFile = document.querySelector(".containerFile label");
 const iconFile  = document.querySelector(".containerFile .fa-image");
 const pFile = document.querySelector(".containerFile p");
@@ -243,6 +243,22 @@ inputFile.addEventListener ("change", ()=>{
         }
 });
 
+
+//Fonction pour afficher l'image séléctionnée
+function afficheImage() {
+    let fileInput = document.querySelector("input[type=file]");
+    let resultat= document.querySelector("#resultat");
+
+        if(fileInput.files.length >0 ){
+            let FileReader = new FileReader();
+                FileReader.onload =  function(event) {
+                    resultat.setAttribute("src",event.target.result);
+                };
+                FileReader.readAsDataURL(fileInput.files[0]);
+        }
+}
+
+
 //Ajout d'un projet
 
 const form = document.querySelector(".modal-form .donnees form");
@@ -250,30 +266,49 @@ const title = document.querySelector(".modal-form .donnees #title");
 const categorie = document.querySelector(".modal-form .donnees #categorie");
 
 //comparaison des valeurs imput & api (img text titre)
+    
+async function addWorks() {
+    const form = document.querySelector(".modal-form .donnees form");
 
-function addWorks(){
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-    
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error("Token non trouvé. L'utilisateur n'est probablemant pas connecter.");
+            return;
+        }
+
         const formData = new FormData(form);
-    
+
         try {
-            const response = await fetch("http://localhost:5678/api/works",{
+            const response = await fetch("http://localhost:5678/api/works", {
                 method: "POST",
                 body: formData,
+                headers: {
+                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
             });
-    
+
             if (response.ok) {
                 console.log("Nouveau projet ajouté avec succés !");
                 // vider la galerie de l index et de la modale
                 apiWorks();
             } else {
-                console.error("Erreur lors de l'ajout du projet");
+                console.error("Erreur lors de l'ajout du projet :", response.status, response.statusText);
+                const responseBody = await response.json();
+                console.error(responseBody);
             }
-        } catch (error) {
-            console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
-        }    
-    });
-}
+            } catch (error) {
+                console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
+            }    
+        });
+    }
+
+    afficheImage();
+    addWorks();
+
+
 
 
