@@ -64,6 +64,7 @@
 					<h2 id ="titlemodale">Ajout photo</h2>
 					<div class="containerFile">
 						<i class="far fa-image"></i>
+						<img class=previewImg id="resultat"/>
 						<input type="file">
 						<button class="btnAjout">+ Ajout photo</button>
 						<p>jpg, png : 4mo max</p>
@@ -71,7 +72,7 @@
 					<div class="donnees">
 						<form action="#" method="post">
 							<label for="titre">Titre</label>
-							<input type="text" name="titre" id="titre">
+							<input type="text" name="titre" id="titre" accept="image/png, image/jpeg" onchange="afficheImage();">
 							<label for="categorie">Categorie</label>
 							<select name="categorie" id="categorie">
 								<option value="0"></option>

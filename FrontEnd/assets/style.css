@@ -302,6 +302,10 @@ font-size: 26px;
 	font-size: 78px;
 	color: #CBD6DC;
 }
+.previewImg{
+	width: 150px;
+	height: 177px;
+}
 .btnAjout{
 	text-align: center;
 	background-color:#CBD6DC;

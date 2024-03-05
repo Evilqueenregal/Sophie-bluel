@@ -282,11 +282,11 @@ async function addWorks() {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch("http://localhost:5678/api/works", {
+            const response = await fetch(`http://localhost:5678/api/works`, {
                 method: "POST",
                 body: formData,
                 headers: {
-                     "Content-Type": "application/json",
+                    //  "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 },
             });
