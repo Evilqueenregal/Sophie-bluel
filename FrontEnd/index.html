@@ -65,14 +65,14 @@
 					<div class="containerFile">
 						<i class="far fa-image"></i>
 						<img class=previewImg id="resultat"/>
-						<input type="file">
+						<input type="file" name="" id="" accept="image/png, image/jpeg" onchange="afficheImage();">
 						<button class="btnAjout">+ Ajout photo</button>
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<div class="donnees">
 						<form action="#" method="post">
 							<label for="titre">Titre</label>
-							<input type="text" name="titre" id="titre" accept="image/png, image/jpeg" onchange="afficheImage();">
+							<input type="text" name="titre" id="titre">
 							<label for="categorie">Categorie</label>
 							<select name="categorie" id="categorie">
 								<option value="0"></option>

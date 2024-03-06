@@ -246,13 +246,15 @@ inputFile.addEventListener ("change", ()=>{
 
 //Fonction pour afficher l'image séléctionnée
 function afficheImage() {
-    let fileInput = document.querySelector("input[type=file]");
+    let file = document.querySelector("input[type=file]").files;
     let resultat= document.querySelector("#resultat");
 
-        if(fileInput.files.length >0 ){
+        if(file.length >0 ){
             let FileReader = new FileReader();
                 FileReader.onload =  function(event) {
-                    resultat.setAttribute("src",event.target.result);
+                    document
+                    .getElementById("resultat")
+                    .setAttribute("src", event.target.result);
                 };
                 FileReader.readAsDataURL(fileInput.files[0]);
         }
