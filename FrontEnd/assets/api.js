@@ -6,7 +6,6 @@ const apiWorks = async() => {
     showWorks(workData);
     deleteProjet();
     addWorks();
-    afficheImage();
 }
 
 apiWorks();

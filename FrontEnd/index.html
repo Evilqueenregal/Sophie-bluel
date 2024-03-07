@@ -63,10 +63,14 @@
 					</div>
 					<h2 id ="titlemodale">Ajout photo</h2>
 					<div class="containerFile">
+						<div id="preview-img-block" class="cacher">
+							<img id=previewImg src="" alt="Aperçut Image">
+						</div>
 						<i class="far fa-image"></i>
-						<img class=previewImg id="resultat"/>
-						<input type="file" name="" id="" accept="image/png, image/jpeg" onchange="afficheImage();">
-						<button class="btnAjout">+ Ajout photo</button>
+						<button class="btnAjout">
+							<input type="file" name="" id="" accept="image/png, image/jpeg">
+							+ Ajout photo
+						</button>
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<div class="donnees">
@@ -76,9 +80,9 @@
 							<label for="categorie">Categorie</label>
 							<select name="categorie" id="categorie">
 								<option value="0"></option>
-								<option value="0">Objets</option>
-								<option value="0">Appartements</option>
-								<option value="0">Hôtels & restaurants </option>
+								<option value="1">Objets</option>
+								<option value="2">Appartements</option>
+								<option value="3">Hôtels & restaurants </option>
 							</select>
 							<div class="textCenter">
 								<button class="button2">Valider</button>

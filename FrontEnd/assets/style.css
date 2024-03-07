@@ -286,6 +286,7 @@ font-size: 26px;
 
 .modal-form{
 	display: none;
+}
 .containerFile{
 	display: flex;
 	flex-direction: column;
@@ -315,22 +316,31 @@ font-size: 26px;
 	border: 2px solid #CBD6DC;
 	padding: 10px 20px;
 	width: 33%;
+	position: relative;
 }
-p{
-	color: #444444;
-	padding: 10px;
-	font-size: 10px;
-	font-weight: 400;
+.btnAjout input{
+	top: 0;
+	left: 0;
+	padding: 8px;
+	position: absolute;
+	opacity: 0;
 }
-
+#preview-img-block{
+	display: none;
 }
-
+#preview-img-block img{
+	width: 30%;
+	margin-left: 140px;
+}
 .donnees {
 	margin-top: 20px;
 }
-
+.donnees button:disabled{
+	background-color: #A7A7A7;
+	cursor: not-allowed;
+}
 .btnValid {
-	color:white;
+	color: white;
 	background-color: #A7A7A7;
 	width: 237px;
 	height: 36px;

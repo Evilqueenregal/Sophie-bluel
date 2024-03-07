@@ -222,22 +222,28 @@ btnBack.addEventListener('click', () => {
 //2eme modal
 
 const previewImg = document.querySelector(".containerFile img");
+const previewImgBlock = document.querySelector("#preview-img-block");
 const inputFile = document.querySelector(".containerFile input ");
-const labelFile = document.querySelector(".containerFile label");
+const btnAjout = document.querySelector(".btnAjout");
 const iconFile  = document.querySelector(".containerFile .fa-image");
 const pFile = document.querySelector(".containerFile p");
+const inputTitle = document.querySelector('#titre');
+const selectCategory = document.querySelector('#categorie');
+const btnValider = document.querySelector('.donnees button');
 
 inputFile.addEventListener ("change", ()=>{
     const file = inputFile.files[0];
         
         if (file) {
             const reader = new FileReader();
+
+            iconFile.style.display = "none";
+            btnAjout.style.display = "none";
+            pFile.style.display = "none";
+            previewImgBlock.style.display = "block";
+
             reader.onload = function (e) {
                 previewImg.src = e.target.result;
-                previewImg.style.display = "flex";
-                labelFile.style.display = "none";
-                iconFile.style.display = "none";
-                pFile.style.display = "none";
             };
             reader.readAsDataURL(file);
         }
@@ -245,20 +251,19 @@ inputFile.addEventListener ("change", ()=>{
 
 
 //Fonction pour afficher l'image séléctionnée
-function afficheImage() {
-    let file = document.querySelector("input[type=file]").files;
-    let resultat= document.querySelector("#resultat");
-
-        if(file.length >0 ){
-            let FileReader = new FileReader();
-                FileReader.onload =  function(event) {
-                    document
-                    .getElementById("resultat")
-                    .setAttribute("src", event.target.result);
-                };
-                FileReader.readAsDataURL(fileInput.files[0]);
-        }
+function checkFormInputs() {
+   if (inputFile.files.length > 0 && inputTitle.value && selectCategory.value !== "0") {
+        btnValider.removeAttribute('disabled');
+   } else {
+        btnValider.setAttribute('disabled', 'disabled');
+   }
 }
+
+checkFormInputs();
+
+inputFile.addEventListener('change', checkFormInputs);
+inputTitle.addEventListener('input', checkFormInputs);
+selectCategory.addEventListener('change', checkFormInputs);
 
 
 //Ajout d'un projet
@@ -308,7 +313,6 @@ async function addWorks() {
         });
     }
 
-    afficheImage();
     addWorks();
 
 
