@@ -275,7 +275,7 @@ const categorie = document.querySelector(".modal-form .donnees #categorie");
 //comparaison des valeurs imput & api (img text titre)
     
 async function addWorks() {
-    const form = document.querySelector(".modal-form .donnees form");
+    const form = document.querySelector(".addPicture");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -287,33 +287,41 @@ async function addWorks() {
         }
 
         const formData = new FormData(form);
-
+        console.log(formData)
+        
         try {
-            const response = await fetch(`http://localhost:5678/api/works`, {
+            fetch(`http://localhost:5678/api/works`, {
                 method: "POST",
                 body: formData,
                 headers: {
-                    //  "Content-Type": "application/json",
+                     //"Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 },
-            });
-
-            if (response.ok) {
-                console.log("Nouveau projet ajouté avec succés !");
-                // vider la galerie de l index et de la modale
-                apiWorks();
-            } else {
-                console.error("Erreur lors de l'ajout du projet :", response.status, response.statusText);
-                const responseBody = await response.json();
-                console.error(responseBody);
-            }
+            }).then((response)=>{
+                if (!response.ok) {
+                    console.log("erreur lors de l'envois du post")
+                }
+                return response.json
+            })
+            .then((data)=>{
+                console.log("fichier envoyer avec succes"+data)
+            })
+            // if (response.ok) {
+            //     console.log("Nouveau projet ajouté avec succés !");
+            //     // vider la galerie de l index et de la modale
+            //     apiWorks();
+            // } else {
+            //     console.error("Erreur lors de l'ajout du projet :", response.status, response.statusText);
+            //     const responseBody = await response.json();
+            //     console.error(responseBody);
+            // }
             } catch (error) {
                 console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
             }    
         });
     }
 
-    addWorks();
+    
 
 
 

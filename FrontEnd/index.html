@@ -62,23 +62,23 @@
 						<i class="fas fa-arrow-left"></i>
 					</div>
 					<h2 id ="titlemodale">Ajout photo</h2>
+					<form class="addPicture" action="#" method="post">
 					<div class="containerFile">
 						<div id="preview-img-block" class="cacher">
 							<img id=previewImg src="" alt="Aperçut Image">
 						</div>
 						<i class="far fa-image"></i>
 						<button class="btnAjout">
-							<input type="file" name="" id="" accept="image/png, image/jpeg">
+							<input type="file" name="image" id="" accept="image/png, image/jpeg">
 							+ Ajout photo
 						</button>
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<div class="donnees">
-						<form action="#" method="post">
 							<label for="titre">Titre</label>
-							<input type="text" name="titre" id="titre">
+							<input type="text" name="title" id="titre">
 							<label for="categorie">Categorie</label>
-							<select name="categorie" id="categorie">
+							<select name="category" id="categorie">
 								<option value="0"></option>
 								<option value="1">Objets</option>
 								<option value="2">Appartements</option>

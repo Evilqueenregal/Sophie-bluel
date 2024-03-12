@@ -297,7 +297,6 @@ font-size: 26px;
 	background-color: #E8F1F6;
 	width: 420px;
 	height: 169px;
-	margin-left: 90px;
 }
 .fa-image{
 	font-size: 78px;
@@ -334,6 +333,9 @@ font-size: 26px;
 }
 .donnees {
 	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 70%;
 }
 .donnees button:disabled{
 	background-color: #A7A7A7;
@@ -358,12 +360,21 @@ font-size: 26px;
 form{
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
-.donnees input, .donnees select{
+.donnees input {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	padding: 15px;
+	width: 93%;
+}
+
+.donnees select {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 15px;
+	width: 100%;
 }
 
 .modal[aria-hidden="true"] {
