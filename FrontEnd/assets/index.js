@@ -268,7 +268,7 @@ selectCategory.addEventListener('change', checkFormInputs);
 
 //Ajout d'un projet
 
-const form = document.querySelector(".modal-form .donnees form");
+const form = document.querySelector(".modal-form form");
 const title = document.querySelector(".modal-form .donnees #title");
 const categorie = document.querySelector(".modal-form .donnees #categorie");
 
@@ -304,17 +304,17 @@ async function addWorks() {
                 return response.json
             })
             .then((data)=>{
+                gallery.innerhtml = "";
+                galleryModal.innerhtml = "";
+                apiWorks();
+                form.reset ();
+                iconFile.style.display = "block";
+                btnAjout.style.display = "block";
+                pFile.style.display = "block";
+                previewImgBlock.style.display = "none";
                 console.log("fichier envoyer avec succes"+data)
             })
-            // if (response.ok) {
-            //     console.log("Nouveau projet ajouté avec succés !");
-            //     // vider la galerie de l index et de la modale
-            //     apiWorks();
-            // } else {
-            //     console.error("Erreur lors de l'ajout du projet :", response.status, response.statusText);
-            //     const responseBody = await response.json();
-            //     console.error(responseBody);
-            // }
+         
             } catch (error) {
                 console.error("Une erreur s'est produite lors de l'envois du formulaire :", error);
             }    

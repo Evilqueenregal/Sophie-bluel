@@ -201,19 +201,22 @@ li:hover {
 
 .galleryModal {
 display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-grid-row-gap: 10px;
-padding: 10px 10px;
-margin: 10px 10px;
-align-items: center;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+gap: 15px;
 border-bottom: 1px solid #B3B3B3;
-button {
-	position: relative;
-	bottom: 127px;
-	right: 32px;
-	background-color:black;
-	border-radius: 3px;
 }
+
+.galleryModal figure {
+	position: relative;
+}
+
+.btn-delete {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: black;
+	border-radius: 3px;
+	border: none;
 }
 
 .js-modal-close {
@@ -237,7 +240,7 @@ hr {
 }
 
 .galleryModal img {
-	width: 80%;
+	width: 100%;
 }
 
 .modal {
@@ -328,8 +331,7 @@ font-size: 26px;
 	display: none;
 }
 #preview-img-block img{
-	width: 30%;
-	margin-left: 140px;
+	width: 100%;
 }
 .donnees {
 	margin-top: 20px;
