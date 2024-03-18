@@ -298,8 +298,8 @@ font-size: 26px;
 	border-radius: 3px;
 	border: 1px solid #E8F1F6;
 	background-color: #E8F1F6;
-	width: 420px;
-	height: 169px;
+	width: 70%;
+	height: 100%;
 }
 .fa-image{
 	font-size: 78px;
@@ -430,16 +430,19 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 100%;
 }
 #contact label {
 	margin: 2em 0 1em 0;
+	margin-right: 90%;
 }
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 100%;
 }
 
-input[type="submit"]{
+ #contact input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
