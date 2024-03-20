@@ -70,10 +70,19 @@ const filters = document.querySelector(".filters");
 
 const admin = document.querySelector('.admin');
 const titlePortfolio = document.querySelector('.title-portfolio');
+const btnLogin = document.querySelector(".btnLogin");
+
+// Ajoutez un gestionnaire d'événement de clic au bouton
+btnLogin.addEventListener("click", () => {
+    // Redirigez l'utilisateur vers votre page de connexion en utilisant window.location.href
+    window.location.href = "login.html";
+});
 
 if (localStorage.getItem('token')) {
     filters.style.display = "none";
     admin.style.display = "block";
+
+    btnLogin.innerHTML = 'logout';
 
     const btnModifier = document.createElement('a');
     btnModifier.href = "#modal1";
@@ -88,6 +97,15 @@ if (localStorage.getItem('token')) {
 
     titlePortfolio.appendChild(btnModifier);
     admin.appendChild(btnEdition);
+
+    // Ajoutez un gestionnaire d'événement de clic au bouton
+    btnLogin.addEventListener("click", () => {
+    // Redirigez l'utilisateur vers votre page de connexion en utilisant window.location.href
+    window.location.href = "index.html";
+    // Supprimer l'élément avec la clé "token" du localStorage
+    window.localStorage.removeItem("token");
+
+});
 }
 
 //La modale
