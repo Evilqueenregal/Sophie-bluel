@@ -101,7 +101,7 @@ if (localStorage.getItem('token')) {
     // Ajoutez un gestionnaire d'événement de clic au bouton
     btnLogin.addEventListener("click", () => {
     // Redirigez l'utilisateur vers votre page de connexion en utilisant window.location.href
-    window.location.href = "index.html";
+    window.location.href = "index.HTML";
     // Supprimer l'élément avec la clé "token" du localStorage
     window.localStorage.removeItem("token");
 
@@ -322,8 +322,8 @@ async function addWorks() {
                 return response.json
             })
             .then((data)=>{
-                gallery.innerhtml = "";
-                galleryModal.innerhtml = "";
+                gallery.innerHTML = "";
+                galleryModal.innerHTML = "";
                 apiWorks();
                 form.reset ();
                 iconFile.style.display = "block";
